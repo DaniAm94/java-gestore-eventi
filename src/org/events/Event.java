@@ -3,6 +3,8 @@ package org.events;
 import org.events.exceptions.EventException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Event {
     private String title;
@@ -88,14 +90,18 @@ public class Event {
         }
         return seats;
     }
+    private String formatDate(){
+        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy MMMM dd", Locale.ITALY);
+        return String.format("%s", date.format(formatter));
+    }
 
     @Override
     public String toString() {
-        return "Event{" +
-                "title='" + title + '\'' +
-                ", date=" + date +
-                ", totalSeats=" + totalSeats +
-                ", bookedSeats=" + bookedSeats +
+        return "Evento{" +
+                "titolo= '" + title + '\'' +
+                ", data= " + formatDate() +
+                ", posti totali= " + totalSeats +
+                ", posti prenotati= " + bookedSeats +
                 '}';
     }
 }

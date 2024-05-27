@@ -15,12 +15,55 @@ public class Main {
 
         LocalDate date= getDate(scanner);
 
-        int seats= getSeats(scanner);
+        int seats= getSeats(scanner, " totali: ");
 
         Event event= null;
+        String choice=null;
         try {
             event = new Event(title, date, seats);
             System.out.println(event);
+            do {
+                System.out.println("1-prenota 2-disdici 3-esci");
+                choice= scanner.nextLine();
+
+                switch (choice){
+
+                    // Prenotazione
+                    case "1":
+                        System.out.println("Quanti posti vuoi prenotare? ");
+                        int seatsToBook= getSeats(scanner, " da preonatare: ");
+                        try {
+                            event.book(seatsToBook);
+                            System.out.println("Operazione effettuata con successo");
+                            System.out.println(event);
+                        } catch (EventException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+
+                    // Cancellazione
+                    case "2":
+                        System.out.println("Quante prenotazioni vuoi disdire? ");
+                        int seatsToCancel= getSeats(scanner, " da cancellare: ");
+                        try {
+                            event.cancelBookings(seatsToCancel);
+                            System.out.println("Operazione effettuata con successo");
+                            System.out.println(event);
+                        } catch (EventException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+
+                    // Chiusura menù
+                    case "3":
+                        break;
+
+                    // Scelta non valida
+                    default:
+                        System.out.println("Scelta non valida");
+                        break;
+                }
+            } while (!choice.equals("3"));
         } catch (EventException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -44,10 +87,10 @@ public class Main {
     }
 
     // Metodo per ricevere i posti dall'utente
-    private static int getSeats(Scanner scanner){
+    private static int getSeats(Scanner scanner, String messagePlus){
         Integer seats= null;
         while (seats== null){
-            System.out.print("Inserisci il numero di posti totali: ");
+            System.out.print("Inserisci il numero di posti " + messagePlus);
             String seatsString= scanner.nextLine();
             try {
                 seats= Integer.parseInt(seatsString);
