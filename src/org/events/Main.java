@@ -3,12 +3,16 @@ package org.events;
 import org.events.exceptions.EventException;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner= new Scanner(System.in);
+
+        Concert concert= new Concert("Concerto figo", LocalDate.parse("2024-12-20"), 500, LocalTime.parse("15:00"), 12.00 );
+        System.out.println(concert);
 
         System.out.print("Inserisci il titolo dell'evento: ");
         String title= scanner.nextLine();
@@ -19,6 +23,8 @@ public class Main {
 
         Event event= null;
         String choice=null;
+
+
         try {
             event = new Event(title, date, seats);
             System.out.println(event);

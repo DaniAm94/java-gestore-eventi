@@ -90,7 +90,7 @@ public class Event {
         }
         return seats;
     }
-    private String formatDate(){
+    private String formattedDate(){
         DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy MMMM dd", Locale.ITALY);
         return String.format("%s", date.format(formatter));
     }
@@ -99,7 +99,7 @@ public class Event {
     public String toString() {
         return "Evento{" +
                 "titolo= '" + title + '\'' +
-                ", data= " + formatDate() +
+                ", data= " + formattedDate() +
                 ", posti totali= " + totalSeats +
                 ", posti prenotati= " + bookedSeats +
                 '}';
